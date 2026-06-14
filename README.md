@@ -1,11 +1,10 @@
 # srsRAN-GUI
-# srsUE 5G Manager GUI
 
 Ứng dụng giao diện đồ họa (GUI) được viết bằng Python và PyQt6 nhằm mục đích đơn giản hóa và tự động hóa quá trình cấu hình, vận hành thiết bị đầu cuối (`srsUE`) trong hệ thống mạng di động 4G/5G mô phỏng.
 
 Ứng dụng giúp loại bỏ thao tác can thiệp thủ công vào file cấu hình `ue.conf`, tự động đồng bộ hóa các thông số bảo mật (IMSI, K, OPc, APN) và khởi chạy tiến trình trực tiếp từ giao diện.
 
-## 🛠️ Yêu cầu hệ thống (Prerequisites)
+## Yêu cầu hệ thống 
 
 Để ứng dụng có thể hoạt động hoàn chỉnh, máy trạm (Host) bắt buộc phải được cài đặt sẵn các thành phần hạ tầng sau:
 
@@ -14,12 +13,12 @@
 3. **Mạng vô tuyến (RAN):** Phần mềm [srsRAN](https://github.com/srsran/srsRAN_4G) đã được biên dịch thành công.
 4. **Môi trường Python:** Python 3.x và công cụ quản lý gói `pip`.
 
-### ⚠️ Lưu ý đặc biệt về ZeroMQ (ZMQ)
+###  Lưu ý đặc biệt về ZeroMQ (ZMQ)
 Dự án này sử dụng kết nối vô tuyến ảo qua **ZeroMQ**. Yêu cầu `srsRAN` trên máy chủ phải được biên dịch cùng với thư viện ZMQ. 
 * Nếu `srsRAN` được cài đặt mà bỏ qua bước liên kết ZMQ, kết nối mạng sẽ thất bại (Lỗi cổng TCP 2000/2001).
 * **Cách khắc phục nếu thiếu ZMQ:** Cần cài đặt gói `libzmq3-dev` (`sudo apt install libzmq3-dev`), sau đó tiến hành `cmake` và `make` lại toàn bộ mã nguồn `srsRAN`.
 
-## 📦 Cài đặt (Installation)
+## Cài đặt
 
 1. Clone kho lưu trữ này về máy:
    ```bash
@@ -32,7 +31,7 @@ Dự án này sử dụng kết nối vô tuyến ảo qua **ZeroMQ**. Yêu cầ
    pip install -r requirements.txt
    ```
 
-## 🚀 Hướng dẫn vận hành (How to Run)
+##  Hướng dẫn vận hành
 
 Quá trình khởi động mạng cần tuân thủ nghiêm ngặt theo thứ tự: Mạng lõi -> Trạm phát -> Thiết bị đầu cuối (App GUI).
 
@@ -59,7 +58,7 @@ python3 main.py
 3. Nhấn nút **"2. Start srsUE"** để bắt đầu quá trình Attach vào mạng. 
 4. Theo dõi log trên terminal để xác nhận trạng thái `Network attach successful` và IP được cấp.
 
-## ⚙️ Khắc phục sự cố (Troubleshooting)
+##  Khắc phục sự cố (Troubleshooting)
 
 * **Lỗi `Address already in use`:** Xảy ra khi tiến trình cũ chưa được đóng hoàn toàn, chiếm dụng cổng ZMQ. Xử lý bằng lệnh: `sudo killall -9 srsenb srsue python3`, sau đó khởi động lại từ Bước 2.
 * **Lỗi `IndentationError` khi chạy Python:** Kiểm tra lại định dạng thụt lề (spaces/tabs) bên trong file `main.py` nếu có sự thay đổi hoặc sao chép mã nguồn.
